@@ -15,14 +15,20 @@ module Authtrail
 
       argument :port, desc: 'port in which you want to run your server on default 3000'
 
-      def call(port: 4567)
+      def call(port: 4567, **)
         system "ruby server/server.rb"
       end
+    end
 
+    class Specs < Dry::CLI::Command
+      desc "run tests"
+      def call(**)
+        system 'bundle exec rspec'
+      end
     end
 
     register 'serve', Serve
-
+    register 'specs', Specs
   end
 end
 
