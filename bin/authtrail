@@ -4,7 +4,8 @@
 
 require 'dry/cli'
 
-require_relative '../app'
+require_relative '../config/mongoid'
+require_relative '../app/models/audit_event'
 
 module Authtrail
   class Cli
@@ -24,8 +25,18 @@ module Authtrail
       end
     end
 
+    class Poke < Dry::CLI::Command
+      desc 'does a dry test for the app and dependencies'
+
+      def call(*)
+        puts 'testing the mongo connection'
+        puts "there are in total #{AuditEvent.count} records in the database for the audit events"
+      end
+    end
+
     register 'serve', Serve
     register 'specs', Specs
+    register 'poke', Poke
   end
 end
 
