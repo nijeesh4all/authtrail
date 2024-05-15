@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require 'dry/cli'
+
+require_relative '../app'
+
+module Authtrail
+  class Cli
+    extend Dry::CLI::Registry
+
+    class Start < Dry::CLI::Command
+      desc "start dev server"
+
+      argument :port, 'port in which you want to run your server on default 3000'
+
+      def call(port: 3000)
+        system "bundle exec sinatra"
+      end
+
+    end
+  end
+end
