@@ -11,12 +11,9 @@ module Authtrail
     extend Dry::CLI::Registry
 
     class Serve < Dry::CLI::Command
-      desc "start dev server"
-
-      argument :port, desc: 'port in which you want to run your server on default 3000'
-
-      def call(port: 4567, **)
-        system "ruby server/server.rb"
+      desc 'tart dev server'
+      def call(**)
+        system 'ruby server/server.rb'
       end
     end
 
