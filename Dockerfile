@@ -1,4 +1,4 @@
-FROM ruby:3.3.1-slim
+FROM ruby:3.1.3-slim
 
 RUN apt update && apt upgrade -y
 
