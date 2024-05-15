@@ -13,7 +13,7 @@ module Authtrail
     class Serve < Dry::CLI::Command
       desc 'tart dev server'
       def call(**)
-        system 'ruby server/server.rb'
+        system 'ruby app/server.rb'
       end
     end
 
