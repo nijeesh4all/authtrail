@@ -13,3 +13,5 @@ gem "rackup", "~> 2.1"
 gem "mongoid", "~> 9.0"
 
 gem "rubocop", "~> 1.63"
+
+gem "rspec", "~> 3.13"
