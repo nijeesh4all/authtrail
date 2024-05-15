@@ -1,0 +1,4 @@
+database: auth_events
+hosts:
+  - mongodb:27017
+log_level: :info
