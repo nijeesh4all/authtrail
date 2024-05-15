@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     base64 (0.2.0)
+    dry-cli (1.0.0)
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
     rack (3.0.11)
@@ -18,13 +19,16 @@ GEM
       rack-session (>= 2.0.0, < 3)
       tilt (~> 2.0)
     tilt (2.3.0)
+    zeitwerk (2.6.14)
 
 PLATFORMS
   ruby
   x86_64-linux
 
 DEPENDENCIES
+  dry-cli (~> 1.0)
   sinatra
+  zeitwerk (~> 2.6)
 
 BUNDLED WITH
    2.5.9
