@@ -11,3 +11,5 @@ gem "zeitwerk", "~> 2.6"
 gem "rackup", "~> 2.1"
 
 gem "mongoid", "~> 9.0"
+
+gem "rubocop", "~> 1.63"
