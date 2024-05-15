@@ -10,15 +10,21 @@ module Authtrail
   class Cli
     extend Dry::CLI::Registry
 
-    class Start < Dry::CLI::Command
+    class Serve < Dry::CLI::Command
       desc "start dev server"
 
-      argument :port, 'port in which you want to run your server on default 3000'
+      argument :port, desc: 'port in which you want to run your server on default 3000'
 
-      def call(port: 3000)
-        system "bundle exec sinatra"
+      def call(port: 4567)
+        system "ruby server/server.rb"
       end
 
     end
+
+    register 'serve', Serve
+
   end
 end
+
+
+Dry::CLI.new(Authtrail::Cli).call

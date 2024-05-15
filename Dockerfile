@@ -14,4 +14,4 @@ RUN bundle install
 
 COPY . .
 
-CMD ["irb"]
+CMD ["bin/authtrail serve"]

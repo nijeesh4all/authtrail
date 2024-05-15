@@ -3,4 +3,4 @@ require 'bundler/setup'
 
 
 
-@@LOADER = Zeitwerk::Loader.new
+LOADER = Zeitwerk::Loader.new
