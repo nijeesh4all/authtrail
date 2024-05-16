@@ -4,8 +4,6 @@ require_relative '../../app/models/audit_event'
 
 require 'mongoid'
 require 'mongoid-rspec'
-
-require 'mongoid'
 require 'rspec'
 
 describe AuditEvent do

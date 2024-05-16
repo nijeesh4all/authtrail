@@ -1,6 +1,9 @@
 require_relative '../models/audit_event'
 
 class AuditEventPresenter
+
+  DEFAULT_PAGE_SIZE = 10
+
   def initialize(params)
     @params = params
   end
