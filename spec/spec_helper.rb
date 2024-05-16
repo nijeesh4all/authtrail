@@ -13,6 +13,10 @@
 # it.
 #
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+
+require 'rack/test'
+require 'mongoid'
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
@@ -95,4 +99,25 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+
+  config.before(:all) do
+    MONGO_CONFIG = YAML.load_file('/app/config/mongoid.yml')
+
+    Mongoid.configure do |config|
+      config.clients.default = {
+        hosts: MONGO_CONFIG['hosts'],
+        database: "#{MONGO_CONFIG['database']}_test"
+      }
+      config.log_level = MONGO_CONFIG['log_level']
+    end
+  end
+
+  # Start with a clean database for each test
+  config.around(:each) do |example|
+    Mongoid.purge!
+    example.run
+    Mongoid.purge!
+  end
+
+  config.include Rack::Test::Methods
 end
