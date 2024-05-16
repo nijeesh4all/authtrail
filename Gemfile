@@ -17,3 +17,7 @@ gem "rubocop", "~> 1.63"
 gem "rspec", "~> 3.13"
 
 gem "rabl", "~> 0.16.1"
+
+gem 'rack-test'
+
+gem 'mongoid-rspec'
