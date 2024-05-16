@@ -24,5 +24,4 @@ class AuditEvent
   scope :by_company_id, -> (company_id) { where(company_id: company_id) }
   scope :by_event_type, -> (event_type) { where(event_type: event_type) }
   scope :by_timestamp, -> (from, to) { where(timestamp: { '$gte': from, '$lte': to }) }
-
 end
