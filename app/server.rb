@@ -31,8 +31,5 @@ get '/' do
     total_count: total_count
   }
 
-  logger.info "----------------------"
-  logger.info @audit_events[0].inspect
-
   rabl :index
 end
