@@ -46,6 +46,17 @@ services:
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
 
+  karafka_consumer:
+    build: .
+    volumes:
+      - .:/app
+    depends_on:
+      - kafka
+      - mongodb
+    command: "bin/authtrail consume"
+    deploy:
+      replicas: 1
+
 volumes:
   mongodb_data:
     driver: local

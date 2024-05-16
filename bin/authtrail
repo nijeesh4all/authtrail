@@ -12,7 +12,7 @@ module Authtrail
     extend Dry::CLI::Registry
 
     class Serve < Dry::CLI::Command
-      desc 'tart dev server'
+      desc 'start dev server'
       def call(**)
         system 'ruby app/server.rb'
       end
@@ -34,9 +34,18 @@ module Authtrail
       end
     end
 
+    class Consume < Dry::CLI::Command
+      desc 'consume events from kafka topic'
+
+      def call(**)
+        puts "consuming"
+      end
+    end
+
     register 'serve', Serve
     register 'specs', Specs
     register 'poke', Poke
+    register 'consume', Consume
   end
 end
 
