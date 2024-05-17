@@ -1,0 +1,6 @@
+audit_events:
+  topic_name: audit_events
+  dead_letter_queue:
+    topic_name: audit_events_dlq
+    max_retries: 2
+  partitions: 1
