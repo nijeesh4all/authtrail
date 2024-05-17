@@ -72,6 +72,20 @@ services:
     command: "bin/authtrail consume"
     deploy:
       replicas: 1
+  
+  cli:
+    build: .
+    volumes:
+      - .:/app
+    depends_on:
+      - kafka
+      - mongodb
+    entrypoint: bin/authtrail
+    command: poke
+    deploy:
+      replicas: 1
+
+
 
 volumes:
   mongodb_data:
