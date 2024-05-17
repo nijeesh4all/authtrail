@@ -74,9 +74,33 @@ class KarafkaApp < Karafka::App
   #   details = (error.backtrace || []).join("\n")
   #   ErrorTracker.send_error(error, type, details)
   # end
+
+  routes.draw do
+    topic :audit_events do
+      consumer AuditEventsConsumer
+
+      config(
+        partitions: Konfig.topic_config['audit_events']['partitions']
+      )
+
+      dead_letter_queue(
+        topic: Konfig.topic_config['audit_events']['dead_letter_queue']['topic'],
+        max_retries: Konfig.topic_config['audit_events']['dead_letter_queue']['max_retries'],
+        independent: true
+      )
+    end
+  end
 end
 
 # Karafka now features a Web UI!
 # Visit the setup documentation to get started and enhance your experience.
 #
 # https://karafka.io/docs/Web-UI-Getting-Started
+
+Karafka::Web.setup do |config|
+  # You may want to set it per ENV. This value was randomly generated.
+  config.ui.sessions.secret = '856d5c819469b939edcc6f4e97123bad32c3e72e889c6ae4c99269931ea0eba3'
+end
+
+Karafka::Web.enable!
+

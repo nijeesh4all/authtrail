@@ -23,3 +23,5 @@ gem 'rack-test'
 gem 'mongoid-rspec'
 
 gem "karafka", "~> 2.4"
+
+gem "karafka-web", "~> 0.9.1"
