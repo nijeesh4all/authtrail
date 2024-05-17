@@ -34,77 +34,29 @@ module SampleDataProducer
     end
   end
 
-
-  # Generates a sample message containing user information, a random event type, and event data.
-  #
-  # @return [Hash] a hash representing the sample message.
-  def sample_message # rubocop:disable Metrics/MethodLength
-    user = sample_user
-    {
-      id: id(user),
-      timestamp: Time.now.to_i,
-      user_id: user[:user_id],
-      company_id: user[:company_id],
-      event_type: event_type_sample,
-      event_data: {
-        ip: sample_ip,
-        country: country_sample
-      }
-    }
+  # TODO: make it dynamic so it changes with the resource type
+  private def event_type_sample
+    %w[create update delete moved assigned].sample
   end
 
-  private
-  
-  # Returns a random event type from a predefined list of possible event types.
-  #
-  # @return [String] a random event type.
-  def event_type_sample
-    %w[user_login user_logout user_create user_delete user_update user_captcha_success user_captcha_failed
-       user_login_failed].sample
+  private def resource_id_sample
+    rand(1..1000)
   end
 
-  # Returns a random country from a predefined list of possible countries.
-  #
-  # @return [String] a random country.
-  def country_sample # rubocop:disable Metrics/MethodLength
-    [
-      'United States',
-      'Canada',
-      'Mexico',
-      'Brazil',
-      'Argentina',
-      'United Kingdom',
-      'Germany',
-      'France',
-      'Italy',
-      'Spain',
-      'Russia',
-      'China',
-      'Japan',
-      'India'
-    ].sample
+  private def resource_type_sample
+    ['bug', 'comment'].sample
   end
 
-  # Generates a sample user with a random user ID and assigns a company ID based on the user ID.
-  #
-  # @return [Hash] a hash containing the user_id and company_id.
-  def sample_user
+  private def random_text
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+  end
+
+  private def sample_user
     user_id = rand(0..MAX_USER_ID)
     { user_id: user_id, company_id: user_id % COMPANY_COUNT }
   end
 
-  # Generates a random IP address in the range 192.168.x.x.
-  #
-  # @return [String] a random IP address.
-  def sample_ip
-    "192.168.#{(1...255).to_a.sample}.#{(1...255).to_a.sample}"
-  end
-
-  # Generates a unique event ID using the company ID, user ID, and a random UUID.
-  #
-  # @param user [Hash] a hash containing the user_id and company_id.
-  # @return [String] a unique event ID.
-  def id(user)
+  private def id(user)
     "#{user[:company_id]}-#{user[:user_id]}-#{SecureRandom.uuid}"
   end
 
@@ -116,15 +68,22 @@ module SampleDataProducer
     {
       id: id(user),
       timestamp: Time.now.to_i,
+
       user_id: user[:user_id],
       company_id: user[:company_id],
+
       event_type: event_type_sample,
+
+      resource_id: resource_id_sample,
+      resource_type: resource_type_sample,
+
       event_data: {
-        ip: sample_ip,
-        country: country_sample
+        title: random_text,
+        body: random_text + random_text
       }
     }
   end
+
 end
 
 # Run this file if called directly.
