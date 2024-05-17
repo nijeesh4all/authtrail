@@ -15,7 +15,7 @@ DEFAULT_PAGE_SIZE = 10
 
 Rabl.register!
 
-get '/' do
+get '/audit_events' do
 
   content_type :json
 
