@@ -46,6 +46,20 @@ services:
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
 
+
+  karafka_ui:
+    build: .
+    volumes:
+      - .:/app
+    depends_on:
+      - kafka
+      - mongodb
+    command: "bundle exec rackup karafka_web.ru --host 0.0.0.0 --quiet --port 8081"
+    ports:
+      - '8081:8081'
+    deploy:
+      replicas: 1
+
   karafka_consumer:
     build: .
     volumes:
