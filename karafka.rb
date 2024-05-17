@@ -103,4 +103,3 @@ Karafka::Web.setup do |config|
 end
 
 Karafka::Web.enable!
-
