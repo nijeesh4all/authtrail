@@ -21,3 +21,5 @@ gem "rabl", "~> 0.16.1"
 gem 'rack-test'
 
 gem 'mongoid-rspec'
+
+gem "karafka", "~> 2.4"
