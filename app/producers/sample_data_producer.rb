@@ -74,8 +74,8 @@ module SampleDataProducer
 
       event_type: event_type_sample,
 
-      resource_id: resource_id_sample,
-      resource_type: resource_type_sample,
+      event_resource_id: resource_id_sample,
+      event_resource_type: resource_type_sample,
 
       event_data: {
         title: random_text,

@@ -38,8 +38,8 @@ class AuditEventPresenter
         events = events.send("by_#{attribute}", value.to_i) if value.present?
       when 'event_type'
         events = events.by_event_type(value) if value.present?
-      when 'resource_type'
-        events = events.by_resource_type(value) if value.present?
+      when 'event_resource_type'
+        events = events.by_event_resource_type(value) if value.present?
       end
     end
     events

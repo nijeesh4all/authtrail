@@ -9,7 +9,7 @@ class AuditEventsConsumer < ApplicationConsumer
     super
     @buffer = []
     @transformer = EventTransformer.new(
-      whitelist: %w[id timestamp user_id company_id event_type event_data external_event_id],
+      whitelist: %w[id timestamp user_id company_id event_type event_data external_event_id event_resource_id event_resource_type],
       renames: { 'id' => 'external_event_id' }
     )
   end
