@@ -1,4 +1,5 @@
 require_relative '../models/audit_event'
+require_relative '../Transformers/event_transformer'
 
 class AuditEventsConsumer < ApplicationConsumer
   # Flush every 1000 messages
@@ -7,10 +8,14 @@ class AuditEventsConsumer < ApplicationConsumer
   def initialize
     super
     @buffer = []
+    @transformer = EventTransformer.new(
+      whitelist: %w[id timestamp user_id company_id event_type event_data external_event_id],
+      renames: { 'id' => 'external_event_id' }
+    )
   end
 
   def consume
-    @buffer += messages.payloads
+    @buffer += messages.payloads.map { |payload| @transformer.transform(payload) }
 
     return if @buffer.size < MAX_BUFFER_SIZE
 
