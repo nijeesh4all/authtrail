@@ -1,5 +1,5 @@
 require_relative '../models/audit_event'
-require_relative '../Transformers/event_transformer'
+require_relative '../transformers/event_transformer'
 
 class AuditEventsConsumer < ApplicationConsumer
   # Flush every 1000 messages
