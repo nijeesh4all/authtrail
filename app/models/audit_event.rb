@@ -6,6 +6,8 @@ require 'mongoid'
 class AuditEvent
   include Mongoid::Document
 
+  default_scope -> { order(timestamp: :desc) }
+
   field :id, type: String
   field :timestamp, type: Integer
   field :user_id, type: Integer
