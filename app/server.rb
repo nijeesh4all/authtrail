@@ -1,6 +1,5 @@
 require 'sinatra'
 require 'rabl'
-require 'pry'
 
 require_relative '../config/mongoid'
 require_relative './models/audit_event.rb'
