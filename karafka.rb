@@ -7,6 +7,7 @@ require 'bundler/setup'
 
 require_relative 'config/konfig'
 require_relative 'config/mongoid'
+require_relative 'app/producers/sample_data_producer'
 
 ENV['KARAFKA_ENV'] ||= 'development'
 Bundler.require(:default, ENV['KARAFKA_ENV'])

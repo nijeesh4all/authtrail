@@ -49,7 +49,7 @@ module Authtrail
       desc 'consume events from kafka topic'
 
       def call(**)
-        puts 'consuming'
+        system 'bundle exec karafka server'
       end
     end
 
