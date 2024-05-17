@@ -6,6 +6,7 @@ require 'dry/cli'
 
 require_relative '../config/mongoid'
 require_relative '../app/models/audit_event'
+require_relative '../app/producers/sample_data_producer'
 
 module Authtrail
   class Cli
@@ -15,6 +16,16 @@ module Authtrail
       desc 'start dev server'
       def call(**)
         system 'ruby app/server.rb'
+      end
+    end
+
+    class EmitSamples < Dry::CLI::Command
+      desc 'emits sample audit events via kafka'
+
+      argument :count, desc: 'number of events to emit 1000 by default'
+
+      def call(count: 1000, **)
+        SampleDataProducer.produce_messages(count: count.to_i)
       end
     end
 
@@ -38,10 +49,11 @@ module Authtrail
       desc 'consume events from kafka topic'
 
       def call(**)
-        puts "consuming"
+        puts 'consuming'
       end
     end
 
+    register 'emit-sample', EmitSamples, aliases: ['emit']
     register 'serve', Serve
     register 'specs', Specs
     register 'poke', Poke
